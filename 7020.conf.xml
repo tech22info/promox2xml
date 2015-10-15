@@ -1,0 +1,77 @@
+<domain type='kvm'>
+  <name>vh-template-30db</name>
+  <uuid>6a259191-288a-4989-865c-66ebd76ab255</uuid>
+  <memory unit='KiB'>2097152</memory>
+  <currentMemory unit='KiB'>1048576</currentMemory>
+  <cpu mode='custom' match='exact'>
+    <model fallback='allow'>Opteron_G2</model>
+    <topology sockets='2' cores='2' threads='1'/>
+  </cpu>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-utopic'>hvm</type>
+    <boot dev='hd'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+  <cpu mode='custom' match='exact'>
+    <model fallback='allow'>Opteron_G2</model>
+  </cpu>
+  <clock offset='utc'>
+    <timer name='rtc' tickpolicy='catchup'/>
+    <timer name='pit' tickpolicy='delay'/>
+    <timer name='hpet' present='no'/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>restart</on_crash>
+  <pm>
+    <suspend-to-mem enabled='no'/>
+    <suspend-to-disk enabled='no'/>
+  </pm>
+  <devices>
+    <emulator>/usr/bin/kvm-spice</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/opt/vm/nitra_storm3_7020_base-7020-disk-1.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
+    </disk>
+    <disk type='block' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <target dev='hdb' bus='ide'/>
+      <readonly/>
+      <address type='drive' controller='0' bus='0' target='0' unit='1'/>
+      <source file='/opt/vm/storm3_db_iso_CentOS-6.6-x86_64-bin-DVD1.iso'/>
+    </disk>
+    <interface type='network'>
+      <mac address='52:54:00:ac:e4:8f'/>
+      <source network='default'/>
+      <model type='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    </interface>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <graphics type='spice' autoport='yes'/>
+    <sound model='ich6'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+    </sound>
+    <video>
+      <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+    </video>
+    <redirdev bus='usb' type='spicevmc'>
+    </redirdev>
+    <redirdev bus='usb' type='spicevmc'>
+    </redirdev>
+    <redirdev bus='usb' type='spicevmc'>
+    </redirdev>
+    <redirdev bus='usb' type='spicevmc'>
+    </redirdev>
+    <memballoon model='virtio'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
+    </memballoon>
+  </devices>
+</domain>

@@ -60,7 +60,6 @@ else:
       <target dev='vda' bus='virtio'/>\n\
       <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>\n\
     </disk>\n"
-	print (satas)
 	xml="<domain type='kvm'>\n\
   <name>"+vm_name+"</name>\n\
   <uuid>"+str(uuid.uuid4())+"</uuid>\n\
